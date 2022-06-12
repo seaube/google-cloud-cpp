@@ -33,10 +33,10 @@ https://github.com/bazelbuild/rules_cc/blob/58f8e026c00a8a20767e3dc669f46ba23bc9
 """
 
 load("@rules_cc//cc:action_names.bzl", "CPP_COMPILE_ACTION_NAME")
-load("@rules_cc//cc:toolchain_utils.bzl", "find_cpp_toolchain")
+load("@rules_cc//cc:find_cc_toolchain.bzl", "find_cc_toolchain", "use_cc_toolchain")
 
 def _capture_build_info_impl(ctx):
-    toolchain = find_cpp_toolchain(ctx)
+    toolchain = find_cc_toolchain(ctx)
     feature_configuration = cc_common.configure_features(
         ctx = ctx,
         cc_toolchain = toolchain,
@@ -81,6 +81,6 @@ capture_build_info = rule(
         "output_file": attr.output(mandatory = True),
         "_cc_toolchain": attr.label(default = Label("@bazel_tools//tools/cpp:current_cc_toolchain")),
     },
-    toolchains = ["@bazel_tools//tools/cpp:toolchain_type"],
+    toolchains = use_cc_toolchain(),
     fragments = ["cpp"],
 )
