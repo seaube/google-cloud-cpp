@@ -63,7 +63,7 @@ cc_library(
         ":docfx",
         ":docfx_testing",
         "@com_github_zeux_pugixml//:pugixml",
-        "@com_google_googletest//:gtest_main",
+        "@googletest//:gtest_main",
     ],
 ) for test in unit_tests]
 
